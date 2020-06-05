@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+
+metadata:
+  name: kwet-service-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: kwet.lucurlings.nl
+      http:
+        paths:
+          - backend:
+              serviceName: kwet-service
+              servicePort: 80

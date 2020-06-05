@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kwet-service
+  labels:
+    app: kwet-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kwet-service
+  template:
+    metadata:
+      labels:
+        app: kwet-service
+    spec:
+      containers:
+        - name: kwet-service
+          image: s6individualproject/kwet-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
