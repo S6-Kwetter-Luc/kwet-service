@@ -511,3 +511,6 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/osx,rider,linux,windows,dotnetcore,visualstudio,visualstudiocode
+/kwet-service/appsettings.json
+/kwet-service/appsettings.production.json
+/kwet-service/appsettings.staging.json
