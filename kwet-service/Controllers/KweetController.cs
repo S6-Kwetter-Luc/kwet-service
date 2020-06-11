@@ -33,5 +33,19 @@ namespace kwet_service.Controllers
                 return BadRequest(new {message = ex.Message});
             }
         }
+
+        [HttpGet("{userId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Get(Guid userId)
+        {
+            try
+            {
+                return Ok(await _kweetService.GetByUserId(userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new {message = ex.Message});
+            }
+        }
     }
 }

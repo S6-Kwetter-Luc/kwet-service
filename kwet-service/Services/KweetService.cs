@@ -30,5 +30,10 @@ namespace kwet_service.Services
             };
             return _repository.Create(kweet);
         }
+
+        public async Task<List<Kweet>> GetByUserId(Guid userId)
+        {
+            return await _repository.GetByUserId(userId);
+        }
     }
 }

@@ -16,5 +16,6 @@ namespace kwet_service.Repositories
         Task Update(Guid id, Kweet kweetIn);
         void Remove(Kweet kweetIn);
         Task Remove(Guid id);
+        Task<List<Kweet>> GetByUserId(Guid userId);
     }
 }
