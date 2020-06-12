@@ -31,7 +31,7 @@ namespace kwet_service.Repositories
             await _kweets.Find(kweet => kweet.Id == id).FirstOrDefaultAsync();
 
         public async Task<Kweet> Get(Guid id) =>
-            await _kweets.Find<Kweet>(book => book.Id == id).FirstOrDefaultAsync();
+            await _kweets.Find(book => book.Id == id).FirstOrDefaultAsync();
 
         public async Task<Kweet> Create(Kweet kweet)
         {
@@ -47,5 +47,8 @@ namespace kwet_service.Repositories
 
         public async Task Remove(Guid id) =>
             await _kweets.DeleteOneAsync(kweet => kweet.Id == id);
+
+        public async Task<List<Kweet>> GetByUserId(Guid userId) =>
+            await _kweets.Find(kweet => kweet.Writer.Id == userId).ToListAsync();
     }
 }
