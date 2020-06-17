@@ -8,5 +8,5 @@ spec:
     kind: Deployment
     name: kwet-service
   minReplicas: 2
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 80
+  maxReplicas: 12
+  targetCPUUtilizationPercentage: 75
