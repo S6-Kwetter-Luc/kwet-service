@@ -49,6 +49,6 @@ namespace kwet_service.Repositories
             await _kweets.DeleteOneAsync(kweet => kweet.Id == id);
 
         public async Task<List<Kweet>> GetByUserId(Guid userId) =>
-            await _kweets.Find(kweet => kweet.Writer.Id == userId).ToListAsync();
+            await _kweets.Find(kweet => kweet.Writer.Id == userId).SortByDescending(k => k.DateTime).ToListAsync();
     }
 }
