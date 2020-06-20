@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+
+metadata:
+  name: kwet-service-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+    - host: kwet.lucurlings.nl
+      http:
+        paths:
+          - backend:
+              serviceName: kwet-service
+              servicePort: 80
+  tls:
+    - hosts:
+        - kwet.lucurlings.nl
+      secretName: production-kwet-service-kwetter-tls
