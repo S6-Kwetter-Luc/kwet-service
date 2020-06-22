@@ -6,13 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Exceptions" />
-      <Folder Include="Helpers" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
       <PackageReference Include="MongoDB.Bson" Version="2.10.4" />
       <PackageReference Include="MongoDB.Driver" Version="2.10.4" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.6.0" />
     </ItemGroup>
 
 

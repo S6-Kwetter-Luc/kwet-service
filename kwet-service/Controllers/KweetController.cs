@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using kwet_service.Exceptions;
 using kwet_service.Models;
 using kwet_service.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -20,12 +21,11 @@ namespace kwet_service.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> CreateKweet([FromBody] KweetModel kweetModel)
+        public async Task<IActionResult> CreateKweet([FromBody] KweetModel kweetModel, [FromHeader(Name = "Authorization")] string jwt)
         {
             try
             {
-                await _kweetService.CreateKweet(kweetModel.UserId, kweetModel.Username, kweetModel.Content);
+                await _kweetService.CreateKweet(kweetModel.UserId, kweetModel.Username, kweetModel.Content, jwt);
                 return Ok();
             }
             catch (Exception ex)
@@ -41,6 +41,10 @@ namespace kwet_service.Controllers
             try
             {
                 return Ok(await _kweetService.GetByUserId(userId));
+            }
+            catch (NotAuthenticatedException ex)
+            {
+                return Unauthorized(new {message = ex.Message});
             }
             catch (Exception ex)
             {
