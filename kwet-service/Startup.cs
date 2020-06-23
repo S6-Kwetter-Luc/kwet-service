@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using account_service.Helpers;
 using kwet_service.DatastoreSettings;
 using kwet_service.Helpers;
+using kwet_service.MQ.MessageHandlers;
+using kwet_service.MQ.Messages;
 using kwet_service.Repositories;
 using kwet_service.Services;
+using MessageBroker;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -74,6 +77,10 @@ namespace kwet_service
                 sp.GetRequiredService<IOptions<KwetstoreDatabaseSettings>>().Value);
 
             services.AddControllers();
+
+            services.AddMessageConsumer(Configuration["MessageQueueSettings:Uri"], "kwet-service",
+                builder => builder.WithHandler<DeleteAccountMessageHandler>("delete-user")
+                    .WithHandler<UpdateAccountMessageHandler>("update-user"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
