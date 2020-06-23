@@ -34,6 +34,36 @@ namespace kwet_service.Controllers
             }
         }
 
+        [HttpPost("like/{kweetId}")]
+        public async Task<IActionResult> LikeKweet(Guid kweetId, [FromBody] LikeModel likeModel,
+            [FromHeader(Name = "Authorization")] string jwt)
+        {
+            try
+            {
+                await _kweetService.LikeKweet(kweetId, likeModel.UserId, likeModel.Username, jwt);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new {message = ex.Message});
+            }
+        }
+
+        [HttpPost("unlike/{kweetId}")]
+        public async Task<IActionResult> UnlikeKweet(Guid kweetId, [FromBody] LikeModel likeModel,
+            [FromHeader(Name = "Authorization")] string jwt)
+        {
+            try
+            {
+                await _kweetService.UnlikeKweet(kweetId, likeModel.UserId, likeModel.Username, jwt);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new {message = ex.Message});
+            }
+        }
+
         [HttpGet("{userId}")]
         [AllowAnonymous]
         public async Task<IActionResult> Get(Guid userId)
