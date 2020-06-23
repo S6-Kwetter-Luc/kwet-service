@@ -1,4 +1,4 @@
-﻿﻿namespace kwet_service.MQSettings
+﻿﻿namespace kwet_service.MQ
 {
     public class MessageQueueSettings
     {
