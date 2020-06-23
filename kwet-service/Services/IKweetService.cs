@@ -9,5 +9,6 @@ namespace kwet_service.Services
     {
         Task<Kweet> CreateKweet(Guid kweetModelUserid, string kweetModelUsername, string kweetModelContent, string jwt);
         Task<List<Kweet>> GetByUserId(Guid userId);
+        Task<List<Kweet>> Get();
     }
 }
