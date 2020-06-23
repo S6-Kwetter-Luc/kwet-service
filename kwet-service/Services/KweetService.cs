@@ -44,5 +44,10 @@ namespace kwet_service.Services
         {
             return await _repository.GetByUserId(userId);
         }
+
+        public async Task<List<Kweet>> Get()
+        {
+            return await _repository.Get();
+        }
     }
 }

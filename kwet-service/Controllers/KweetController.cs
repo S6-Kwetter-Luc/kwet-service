@@ -51,5 +51,19 @@ namespace kwet_service.Controllers
                 return BadRequest(new {message = ex.Message});
             }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                return Ok(await _kweetService.Get());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new {message = ex.Message});
+            }
+        }
     }
 }

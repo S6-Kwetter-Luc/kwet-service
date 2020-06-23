@@ -19,7 +19,7 @@ namespace kwet_service.Repositories
         }
 
         public async Task<List<Kweet>> Get() =>
-            await _kweets.Find(kweet => true).ToListAsync();
+            await _kweets.Find(kweet => true).SortByDescending(k => k.DateTime).ToListAsync();
 
         // public async Task<Kweet> GetByEmail(string email) =>
         //     await _kweets.Find(kweet => kweet.Email == email).FirstOrDefaultAsync();
