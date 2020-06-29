@@ -19,7 +19,7 @@ namespace kwet_service.Repositories
         }
 
         public async Task<List<Kweet>> Get() =>
-            await _kweets.Find(kweet => true).ToListAsync();
+            await _kweets.Find(kweet => true).SortByDescending(k => k.DateTime).ToListAsync();
 
         // public async Task<Kweet> GetByEmail(string email) =>
         //     await _kweets.Find(kweet => kweet.Email == email).FirstOrDefaultAsync();
@@ -50,5 +50,16 @@ namespace kwet_service.Repositories
 
         public async Task<List<Kweet>> GetByUserId(Guid userId) =>
             await _kweets.Find(kweet => kweet.Writer.Id == userId).SortByDescending(k => k.DateTime).ToListAsync();
+
+        public async void RemoveKweetsFromUser(Guid userId)
+        {
+            await _kweets.DeleteManyAsync(kweet => kweet.Writer.Id == userId);
+        }
+
+        public async void UpdateKweetsByUser(Guid userId, string newUsername)
+        {
+            await _kweets.UpdateManyAsync(kweet => kweet.Writer.Id == userId,
+                Builders<Kweet>.Update.Set(kweet => kweet.Writer, new  User{Id = userId, Username = newUsername}));
+        }
     }
 }
